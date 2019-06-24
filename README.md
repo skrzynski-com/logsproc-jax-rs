@@ -51,8 +51,6 @@ Additional points will be granted for:
 
 ## My comment
 
-I have used CompletableFuture to process data parallelly. I have used Semaphore with externalized configuration 
-to not load too much data to memory before CompletableFuture tasks will be able to consume it.
 I had to code it in short time so below I put what could be done in the future.
 
 ## TODO
