@@ -11,7 +11,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -29,13 +28,13 @@ import static org.springframework.http.HttpHeaders.ACCEPT;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@ActiveProfiles("test")
 public class LogsEndpointTest {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -80,7 +79,7 @@ public class LogsEndpointTest {
         ResponseEntity<Void> responseEntity = restTemplate.exchange(new URI(address), POST, httpEntity, Void.class);
 
         // then
-        assertThat(responseEntity).extracting(ResponseEntity::getStatusCode).isEqualTo(OK);
+        assertThat(responseEntity).extracting(ResponseEntity::getStatusCode).isEqualTo(CREATED);
 
         LogEntry logEntry1 = logsMapper.getById(ID_1);
         checkLogEntryWithId1(logEntry1);

@@ -15,8 +15,8 @@ import static com.skrzynski.logsproc.log.LogConstants.WITH_ALERT;
 import static java.util.Optional.ofNullable;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
+import static javax.ws.rs.core.Response.Status.CREATED;
 import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
-import static javax.ws.rs.core.Response.Status.OK;
 
 @Component
 @Path("/")
@@ -33,7 +33,7 @@ public class LogsEndpoint {
     @Path("/logs")
     @Consumes({TEXT_PLAIN})
     public Response processLines(String lines) {
-        Status responseStatus = OK;
+        Status responseStatus = CREATED;
         try {
             logsService.loadData(lines);
         } catch (RuntimeException e) {
